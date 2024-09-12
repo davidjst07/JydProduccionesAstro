@@ -4,33 +4,71 @@ import { Icon } from 'astro-icon/components'
 const { src = '/astronaut-hero-img.webp' } = Astro.props
 ---
 
-<section class="hero my-24">
+<section class="hero my-6">
   <div class="container">
     <div class="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
-      <div class="flex flex-col items-center gap-8 md:items-start">
+      <div class="flex flex-col items-center gap-16 md:items-start">
         <h1 class="text-center text-6xl md:text-left lg:text-8xl">
-          <slot><span class="text-gradient">Accessible</span> Starter for Astro</slot>
+          <slot><span class="text-gradient">Hacemos</span> realidad tus ideas</slot>
         </h1>
         <div class="flex flex-col gap-3 min-[500px]:flex-row">
-          <a class="button has-icon" href="https://github.com/markteekman/accessible-astro-starter">
+          <a class="button has-icon" href="./blog">
             <Icon name="ion:star-outline" />
-            Star on GitHub
+            Portafolio
           </a>
           <a
             class="button has-icon color-secondary"
-            href="https://github.com/markteekman/accessible-astro-starter/blob/main/README.md"
+            href="./contacto"
           >
             <Icon name="ion:bookmark-outline" />
-            Read the Docs
+            Contacto
           </a>
         </div>
       </div>
-      <img class="hidden lg:block" src={src} alt="" decoding="async" />
+      <img class="hidden md:block" src={src} alt="" decoding="async" />
     </div>
   </div>
 </section>
 
 <style lang="scss">
+.hero {
+  position: relative;
+  height: 50vh;
+  background: url('/fondo.jpg') center/cover no-repeat;
+
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(179, 174, 174, 0.5); /* Color y opacidad de la capa */
+  z-index: 1;
+  pointer-events: none; /* Asegura que la capa no interfiera con el contenido interactivo */
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero img {
+  position: relative;
+  z-index: 0;
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 640px) {
+  .hero img {
+    width: 100%;
+    height: auto;
+  }
+}
+
   .text-gradient {
     background: linear-gradient(315deg, var(--primary-200) 25%, var(--secondary-500));
     background-clip: border-box;
@@ -44,4 +82,20 @@ const { src = '/astronaut-hero-img.webp' } = Astro.props
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.button.has-icon {
+  margin-right: 0.5rem;
+}
 </style>
